@@ -1,14 +1,29 @@
 <template>
   <div class="changeCss">
-    <input v-model="name" @keydown.enter="add" type="text"
+    <input v-model="name" @keydown.enter="edit" type="text"
            class="form-element" placeholder="alterar">
-    <button class="form-element" @click="add"><i class="material-icons">edit</i></button>
+    <button class="form-element" @click="edit"><i class="material-icons">edit</i></button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "TaskChange"
+  props: ['task'],
+  data() {
+    return {
+      name: this.task.name,
+      pending: ''
+    }
+  },
+  methods: {
+    edit() {
+      /*this.$emit('taskChange', { name: this.name})
+      this.name = ''*/
+      this.$emit('fecharInput', false)
+      this.$emit('updateTask',{nameCurrent: this.task.name, nameNew: this.name })
+    }
+  }
+
 }
 </script>
 

@@ -9,7 +9,11 @@
     <p>{{task.name}}</p>
    </div>
   <div v-if="toogle">
-    <task-change></task-change>
+    <task-change 
+    :task='task'
+    @fecharInput="fecharInput"
+    @updateTask="$emit('updateTask', $event)"
+    ></task-change>
   </div>
   </div>
 </template>
@@ -34,6 +38,17 @@ export default {
         pending: this.task.pending,
         done: !this.task.pending
       }
+    }
+  },
+
+  methods: {
+    fecharInput(event) {
+      this.toogle = event.value
+    },
+
+    updatedTask(event) {
+      /* eslint-disable */
+      console.log(event);
     }
   }
 }
